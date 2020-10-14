@@ -1,13 +1,13 @@
 package dev.jarcadia.vimes;
 
-import com.jarcadia.rcommando.Index;
-import com.jarcadia.rcommando.RedisCommando;
+import dev.jarcadia.redao.Index;
+import dev.jarcadia.redao.RedaoCommando;
 
 public class NotificationService {
 
     private final Index notifications;
 
-    public NotificationService(RedisCommando rcommando) {
+    public NotificationService(RedaoCommando rcommando) {
         this.notifications = rcommando.getPrimaryIndex("notifications");
     }
 

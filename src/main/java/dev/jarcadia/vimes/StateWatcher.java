@@ -1,8 +1,8 @@
 package dev.jarcadia.vimes;
 
-import com.jarcadia.rcommando.RedisCommando;
-import com.jarcadia.retask.annontations.RetaskChangeHandler;
-import com.jarcadia.retask.annontations.RetaskParam;
+import dev.jarcadia.redao.RedaoCommando;
+import dev.jarcadia.retask.annontations.RetaskChangeHandler;
+import dev.jarcadia.retask.annontations.RetaskParam;
 import dev.jarcadia.vimes.model.Group;
 import dev.jarcadia.vimes.model.Instance;
 import org.slf4j.Logger;
@@ -22,7 +22,7 @@ public class StateWatcher {
     }
 
     @RetaskChangeHandler(type = "instance", field = "state")
-    public void instanceStateChanged(RedisCommando rcommando, @RetaskParam("object") Instance instance,
+    public void instanceStateChanged(RedaoCommando rcommando, @RetaskParam("object") Instance instance,
             @RetaskParam("after") States.InstanceState state) {
 
         logger.info("Instance {} changed to {}", instance.getId(), state);
@@ -48,7 +48,7 @@ public class StateWatcher {
     }
 
     @RetaskChangeHandler(type = "group", field = "state")
-    public void groupStateChanged(RedisCommando rcommando, @RetaskParam("object") Group group,
+    public void groupStateChanged(RedaoCommando rcommando, @RetaskParam("object") Group group,
             @RetaskParam("before") States.GroupState before, States.GroupState after) {
         logger.info("Group {} changed {} -> {}", group.getId(), before, after);
     }

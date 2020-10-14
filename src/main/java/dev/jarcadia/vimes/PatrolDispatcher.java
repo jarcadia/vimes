@@ -12,18 +12,18 @@ import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jarcadia.rcommando.Dao;
-import com.jarcadia.rcommando.DaoValue;
-import com.jarcadia.rcommando.ProxyIndex;
-import com.jarcadia.rcommando.RedisCommando;
-import com.jarcadia.rcommando.proxy.Proxy;
-import com.jarcadia.retask.HandlerMethod;
-import com.jarcadia.retask.Retask;
-import com.jarcadia.retask.Task;
-import com.jarcadia.retask.annontations.RetaskChangeHandler;
-import com.jarcadia.retask.annontations.RetaskDeleteHandler;
-import com.jarcadia.retask.annontations.RetaskInsertHandler;
-import com.jarcadia.retask.annontations.RetaskWorker;
+import dev.jarcadia.redao.Dao;
+import dev.jarcadia.redao.DaoValue;
+import dev.jarcadia.redao.ProxyIndex;
+import dev.jarcadia.redao.RedaoCommando;
+import dev.jarcadia.redao.proxy.Proxy;
+import dev.jarcadia.retask.HandlerMethod;
+import dev.jarcadia.retask.Retask;
+import dev.jarcadia.retask.Task;
+import dev.jarcadia.retask.annontations.RetaskChangeHandler;
+import dev.jarcadia.retask.annontations.RetaskDeleteHandler;
+import dev.jarcadia.retask.annontations.RetaskInsertHandler;
+import dev.jarcadia.retask.annontations.RetaskWorker;
 import dev.jarcadia.vimes.annontation.GroupPatrol;
 import dev.jarcadia.vimes.annontation.InstancePatrol;
 import dev.jarcadia.vimes.exception.WatchdogException;
@@ -43,7 +43,7 @@ public class PatrolDispatcher {
     
 //    private final Map<String, HandlerMethod> instancePatrolsHandlers;
     
-    private final RedisCommando rcommando;
+    private final RedaoCommando rcommando;
     private final ProxyIndex<Instance> instanceSet;
     private final ProxyIndex<Group> groupSet;
     private final ProxyIndex<Patrol> instancePatrolSet;
@@ -51,7 +51,7 @@ public class PatrolDispatcher {
     private final ProxyIndex<ActivePatrol> activePatrolSet;
     
 
-    protected PatrolDispatcher(RedisCommando rcommando, List<HandlerMethod> instancePatrolHandlers, List<HandlerMethod> groupPatrolHandlers) {
+    protected PatrolDispatcher(RedaoCommando rcommando, List<HandlerMethod> instancePatrolHandlers, List<HandlerMethod> groupPatrolHandlers) {
     	this.rcommando = rcommando;
     	this.instanceSet = rcommando.getPrimaryIndex("instance", Instance.class);
     	this.groupSet = rcommando.getPrimaryIndex("group", Group.class);

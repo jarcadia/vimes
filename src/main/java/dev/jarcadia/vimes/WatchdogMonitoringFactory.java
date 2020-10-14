@@ -13,7 +13,7 @@ import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.Set;
 
-import com.jarcadia.vimes.model.AlarmLevel;
+import dev.jarcadia.vimes.model.AlarmLevel;
 import dev.jarcadia.vimes.annontation.MonitoredValue;
 import dev.jarcadia.vimes.annontation.MonitoredValues;
 import dev.jarcadia.vimes.exception.WatchdogException;
@@ -21,19 +21,19 @@ import dev.jarcadia.vimes.model.Group;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.jarcadia.rcommando.Dao;
-import com.jarcadia.rcommando.DaoValue;
-import com.jarcadia.rcommando.RedisCommando;
-import com.jarcadia.rcommando.Modification;
-import com.jarcadia.rcommando.proxy.Proxy;
+import dev.jarcadia.redao.Dao;
+import dev.jarcadia.redao.DaoValue;
+import dev.jarcadia.redao.RedaoCommando;
+import dev.jarcadia.redao.Modification;
+import dev.jarcadia.redao.proxy.Proxy;
 
 public class WatchdogMonitoringFactory {
 	
     private final Logger logger = LoggerFactory.getLogger(WatchdogMonitoringFactory.class);
 
-	private final RedisCommando rcommando;
+	private final RedaoCommando rcommando;
 
-	public WatchdogMonitoringFactory(RedisCommando rcommando) {
+	public WatchdogMonitoringFactory(RedaoCommando rcommando) {
 		this.rcommando = rcommando;
 	}
 

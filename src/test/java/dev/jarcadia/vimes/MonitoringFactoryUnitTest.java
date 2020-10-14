@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import com.jarcadia.vimes.model.AlarmLevel;
+import dev.jarcadia.vimes.model.AlarmLevel;
 import dev.jarcadia.vimes.WatchdogMonitoringFactory.RangeLookup;
 
 public class MonitoringFactoryUnitTest {

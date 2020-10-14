@@ -17,17 +17,17 @@ import dev.jarcadia.vimes.model.Group;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.jarcadia.rcommando.CountDownLatch;
-import com.jarcadia.rcommando.ProxyIndex;
-import com.jarcadia.rcommando.RedisCommando;
-import com.jarcadia.rcommando.proxy.Proxy;
-import com.jarcadia.retask.Retask;
-import com.jarcadia.retask.Task;
-import com.jarcadia.retask.TaskBucket;
-import com.jarcadia.retask.annontations.RetaskChangeHandler;
-import com.jarcadia.retask.annontations.RetaskHandler;
-import com.jarcadia.retask.annontations.RetaskParam;
-import com.jarcadia.retask.annontations.RetaskWorker;
+import dev.jarcadia.redao.CountDownLatch;
+import dev.jarcadia.redao.ProxyIndex;
+import dev.jarcadia.redao.RedaoCommando;
+import dev.jarcadia.redao.proxy.Proxy;
+import dev.jarcadia.retask.Retask;
+import dev.jarcadia.retask.Task;
+import dev.jarcadia.retask.TaskBucket;
+import dev.jarcadia.retask.annontations.RetaskChangeHandler;
+import dev.jarcadia.retask.annontations.RetaskHandler;
+import dev.jarcadia.retask.annontations.RetaskParam;
+import dev.jarcadia.retask.annontations.RetaskWorker;
 import dev.jarcadia.vimes.States.DistributionState;
 import dev.jarcadia.vimes.States.InstanceState;
 import dev.jarcadia.vimes.model.Artifact;
@@ -39,10 +39,10 @@ public class DeploymentWorker {
 
     private final Logger logger = LoggerFactory.getLogger(DeploymentWorker.class);
 
-    private final RedisCommando rcommando;
+    private final RedaoCommando rcommando;
     private final NotificationService notify;
 
-    protected DeploymentWorker(RedisCommando rcommando, NotificationService notify) {
+    protected DeploymentWorker(RedaoCommando rcommando, NotificationService notify) {
         this.rcommando = rcommando;
         this.notify = notify;
     }
@@ -132,7 +132,7 @@ public class DeploymentWorker {
     }
 
     @RetaskHandler("deploy.artifact")
-    public void deployUpgrade(RedisCommando rcommando, Retask retask, Artifact artifact, List<DeployInstance> instances, TaskBucket bucket) {
+    public void deployUpgrade(RedaoCommando rcommando, Retask retask, Artifact artifact, List<DeployInstance> instances, TaskBucket bucket) {
         try {
             deployHelper(rcommando, retask, artifact, instances, bucket);
         } catch (Exception ex) {
@@ -142,7 +142,7 @@ public class DeploymentWorker {
     }
     
     @RetaskHandler("deploy.restart")
-    public void restart(RedisCommando rcommando, Retask retask, List<DeployInstance> instances, TaskBucket bucket) {
+    public void restart(RedaoCommando rcommando, Retask retask, List<DeployInstance> instances, TaskBucket bucket) {
         try {
             deployHelper(rcommando, retask, null, instances, bucket);
         } catch (Exception ex) {
@@ -151,7 +151,7 @@ public class DeploymentWorker {
         }
     }
     
-    private void deployHelper(RedisCommando rcommando, Retask retask, Artifact artifact, List<DeployInstance> instances, TaskBucket bucket) {
+    private void deployHelper(RedaoCommando rcommando, Retask retask, Artifact artifact, List<DeployInstance> instances, TaskBucket bucket) {
     	boolean isUpgrade = artifact != null;
         String cohortId = UUID.randomUUID().toString();
         

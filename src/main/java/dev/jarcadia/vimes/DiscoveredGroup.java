@@ -1,6 +1,6 @@
 package dev.jarcadia.vimes;
 
-import com.jarcadia.rcommando.Dao;
+import dev.jarcadia.redao.Dao;
 
 import java.util.List;
 import java.util.Map;

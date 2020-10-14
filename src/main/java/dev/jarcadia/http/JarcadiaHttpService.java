@@ -10,14 +10,14 @@ import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.protocol.HttpContext;
 
-import com.jarcadia.rcommando.RedisCommando;
+import dev.jarcadia.redao.RedaoCommando;
 
 public class JarcadiaHttpService {
 	
-	private final RedisCommando rcommando;
+	private final RedaoCommando rcommando;
 	private final HttpQueryService queryService;
 	
-	public JarcadiaHttpService(RedisCommando rcommando) {
+	public JarcadiaHttpService(RedaoCommando rcommando) {
 		this.rcommando = rcommando;
 		this.queryService = new HttpQueryService();
 	}

@@ -10,11 +10,11 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
-import com.jarcadia.rcommando.Dao;
-import com.jarcadia.rcommando.RedisCommando;
-import com.jarcadia.retask.Retask;
-import com.jarcadia.retask.RetaskManager;
-import com.jarcadia.retask.RetaskRecruiter;
+import dev.jarcadia.redao.Dao;
+import dev.jarcadia.redao.RedaoCommando;
+import dev.jarcadia.retask.Retask;
+import dev.jarcadia.retask.RetaskManager;
+import dev.jarcadia.retask.RetaskRecruiter;
 import dev.jarcadia.vimes.annontation.ArtifactDiscoveryHandler;
 import dev.jarcadia.vimes.annontation.GroupDiscoveryHandler;
 import dev.jarcadia.vimes.annontation.GroupPatrol;
@@ -29,7 +29,7 @@ import java.util.Map;
 
 public class Watchdog {
     
-    public static WatchdogManager init(RedisClient redisClient, RedisCommando rcommando, String packageName) {
+    public static WatchdogManager init(RedisClient redisClient, RedaoCommando rcommando, String packageName) {
 
 		// Setup NotificationService
 		NotificationService notificationService = new NotificationService(rcommando);

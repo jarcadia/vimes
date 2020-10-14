@@ -17,19 +17,19 @@ import org.mockito.Mockito;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.jarcadia.rcommando.Dao;
-import com.jarcadia.rcommando.Index;
-import com.jarcadia.rcommando.RedisCommando;
-import com.jarcadia.retask.Retask;
-import com.jarcadia.retask.RetaskManager;
-import com.jarcadia.retask.RetaskRecruiter;
-import com.jarcadia.retask.Task;
-import com.jarcadia.retask.annontations.RetaskChangeHandler;
-import com.jarcadia.retask.annontations.RetaskDeleteHandler;
-import com.jarcadia.retask.annontations.RetaskHandler;
-import com.jarcadia.retask.annontations.RetaskInsertHandler;
-import com.jarcadia.retask.annontations.RetaskParam;
-import com.jarcadia.retask.annontations.RetaskWorker;
+import dev.jarcadia.redao.Dao;
+import dev.jarcadia.redao.Index;
+import dev.jarcadia.redao.RedaoCommando;
+import dev.jarcadia.retask.Retask;
+import dev.jarcadia.retask.RetaskManager;
+import dev.jarcadia.retask.RetaskRecruiter;
+import dev.jarcadia.retask.Task;
+import dev.jarcadia.retask.annontations.RetaskChangeHandler;
+import dev.jarcadia.retask.annontations.RetaskDeleteHandler;
+import dev.jarcadia.retask.annontations.RetaskHandler;
+import dev.jarcadia.retask.annontations.RetaskInsertHandler;
+import dev.jarcadia.retask.annontations.RetaskParam;
+import dev.jarcadia.retask.annontations.RetaskWorker;
 import dev.jarcadia.vimes.States.DistributionState;
 import dev.jarcadia.vimes.States.InstanceState;
 import dev.jarcadia.vimes.model.Artifact;
@@ -57,7 +57,7 @@ public class DeployServiceUnitTest {
     public void testSingleInstanceDeployment() throws Exception {
     	RedisClient redisClient = RedisClient.create("redis://localhost:6379/1");
     	
-        RedisCommando rcommando = RedisCommando.create(redisClient);
+        RedaoCommando rcommando = RedaoCommando.create(redisClient);
         rcommando.core().flushdb();
         RetaskManager manager = Retask.init(redisClient, rcommando, recruiter());
         
@@ -108,7 +108,7 @@ public class DeployServiceUnitTest {
     @Test
     public void testTwoInstanceDeployment() throws Exception {
     	RedisClient redisClient = RedisClient.create("redis://localhost/1");
-        RedisCommando rcommando = RedisCommando.create(redisClient);
+        RedaoCommando rcommando = RedaoCommando.create(redisClient);
         rcommando.core().flushdb();
         RetaskManager manager = Retask.init(redisClient, rcommando, recruiter());
 
@@ -164,7 +164,7 @@ public class DeployServiceUnitTest {
     @Test
     public void testLargeMultiDeployment() throws Exception {
     	RedisClient redisClient = RedisClient.create("redis://localhost/1");
-        RedisCommando rcommando = RedisCommando.create(redisClient);
+        RedaoCommando rcommando = RedaoCommando.create(redisClient);
         rcommando.core().flushdb();
         RetaskManager manager = Retask.init(redisClient, rcommando, recruiter());
         
@@ -228,7 +228,7 @@ public class DeployServiceUnitTest {
     public void testSingleInstanceRestart() throws Exception {
     	RedisClient redisClient = RedisClient.create("redis://localhost:6379/1");
 
-        RedisCommando rcommando = RedisCommando.create(redisClient);
+        RedaoCommando rcommando = RedaoCommando.create(redisClient);
         rcommando.core().flushdb();
         RetaskManager manager = Retask.init(redisClient, rcommando, recruiter());
         
@@ -378,11 +378,11 @@ public class DeployServiceUnitTest {
     @RetaskWorker
     public class StateRecorder {
     	
-    	private final RedisCommando rcommando;
+    	private final RedaoCommando rcommando;
     	private final String guid;
     	private final String activeKey;
 
-        public StateRecorder(RedisCommando rcommando) {
+        public StateRecorder(RedaoCommando rcommando) {
         	this.rcommando = rcommando;
         	this.guid = UUID.randomUUID().toString();
         	this.activeKey = key("active");

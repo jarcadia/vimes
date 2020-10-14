@@ -1,6 +1,6 @@
 package dev.jarcadia.vimes.model;
 
-import com.jarcadia.rcommando.proxy.Proxy;
+import dev.jarcadia.redao.proxy.Proxy;
 
 public interface AppAssignable extends Proxy {
 	

@@ -15,19 +15,19 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 
-import com.jarcadia.rcommando.DaoValues;
+import dev.jarcadia.redao.DaoValues;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.jarcadia.rcommando.Dao;
-import com.jarcadia.rcommando.Index;
-import com.jarcadia.rcommando.RedisCommando;
-import com.jarcadia.rcommando.Modification;
-import com.jarcadia.retask.Retask;
-import com.jarcadia.retask.Task;
-import com.jarcadia.retask.annontations.RetaskHandler;
-import com.jarcadia.retask.annontations.RetaskWorker;
+import dev.jarcadia.redao.Dao;
+import dev.jarcadia.redao.Index;
+import dev.jarcadia.redao.RedaoCommando;
+import dev.jarcadia.redao.Modification;
+import dev.jarcadia.retask.Retask;
+import dev.jarcadia.retask.Task;
+import dev.jarcadia.retask.annontations.RetaskHandler;
+import dev.jarcadia.retask.annontations.RetaskWorker;
 import dev.jarcadia.vimes.exception.DiscoveryException;
 
 @RetaskWorker
@@ -47,16 +47,16 @@ public class DiscoveryWorker {
 		this.discoveredGroupListTypeRef = new TypeReference<>() {};
 	}
 
-	private boolean acquireLock(RedisCommando rcommando, String type) {
+	private boolean acquireLock(RedaoCommando rcommando, String type) {
 		return rcommando.core().getset("discover." + type + ".lock", "locked") == null;
 	}
 
-	private void unlock(RedisCommando rcommando, String type) {
+	private void unlock(RedaoCommando rcommando, String type) {
 		rcommando.core().del("discover." + type + ".lock", "locked");
 	}
 
 	@RetaskHandler("discover.artifacts")
-	public void discoverArtifacts(RedisCommando rcommando, Retask retask) {
+	public void discoverArtifacts(RedaoCommando rcommando, Retask retask) {
 		try {
 			if (acquireLock(rcommando, "artifacts")) {
 				logger.info("Starting artifact discovery");
@@ -119,7 +119,7 @@ public class DiscoveryWorker {
 	}
 
 	@RetaskHandler("discover.instances")
-	public void discover(RedisCommando rcommando, Retask retask) {
+	public void discover(RedaoCommando rcommando, Retask retask) {
 		try {
 			if (acquireLock(rcommando, "instances")) {
 

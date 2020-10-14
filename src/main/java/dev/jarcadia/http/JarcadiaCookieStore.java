@@ -9,8 +9,8 @@ import org.apache.http.cookie.Cookie;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.jarcadia.rcommando.ProxyIndex;
-import com.jarcadia.rcommando.RedisCommando;
+import dev.jarcadia.redao.ProxyIndex;
+import dev.jarcadia.redao.RedaoCommando;
 
 class JarcadiaCookieStore implements CookieStore {
 	
@@ -18,7 +18,7 @@ class JarcadiaCookieStore implements CookieStore {
 	
 	private final ProxyIndex<JarcadiaCookie> cookieSet;
 	
-	protected JarcadiaCookieStore(RedisCommando rcommando, String id) {
+	protected JarcadiaCookieStore(RedaoCommando rcommando, String id) {
 		this.cookieSet = rcommando.getPrimaryIndex("cookies." + id, JarcadiaCookie.class);
 	}
 

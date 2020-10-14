@@ -5,7 +5,7 @@ import java.util.Date;
 
 import org.apache.http.cookie.Cookie;
 
-import com.jarcadia.rcommando.proxy.Proxy;
+import dev.jarcadia.redao.proxy.Proxy;
 
 public interface JarcadiaCookie extends Cookie, Proxy {
 	

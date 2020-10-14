@@ -1,9 +1,9 @@
 package dev.jarcadia.vimes;
 
-import com.jarcadia.retask.RetaskManager;
-import com.jarcadia.retask.RetaskStartupCallback;
-import com.jarcadia.retask.Task;
-import com.jarcadia.retask.WorkerProdvider;
+import dev.jarcadia.retask.RetaskManager;
+import dev.jarcadia.retask.RetaskStartupCallback;
+import dev.jarcadia.retask.Task;
+import dev.jarcadia.retask.WorkerProdvider;
 
 public class WatchdogManager {
 
